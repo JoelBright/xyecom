@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_28_204547) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_29_032527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,17 +21,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_204547) do
   end
 
   create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "product_id", null: false
     t.integer "quantity", default: 0, null: false
     t.decimal "price", precision: 15, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "orders_id", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["orders_id"], name: "index_order_items_on_orders_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name", null: false
+    t.string "token"
     t.decimal "sub_total", precision: 15, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,11 +52,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_204547) do
   end
 
   create_table "product_variants", force: :cascade do |t|
-    t.string "title", null: false
+    t.bigint "product_id", null: false
+    t.string "title", limit: 100, null: false
     t.decimal "price", precision: 15, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "product_id", null: false
     t.index ["product_id"], name: "index_product_variants_on_product_id"
   end
 
@@ -63,8 +68,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_204547) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "orders", column: "orders_id"
+  add_foreign_key "order_items", "products"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
-  add_foreign_key "product_variants", "products"
+  add_foreign_key "product_variants", "products", name: "fk_product_variants_to_product"
 end

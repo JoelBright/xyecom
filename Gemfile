@@ -54,6 +54,8 @@ group :development, :test do
 end
 
 group :development do
+  # This gem is an implementation of the language server protocol specification for Ruby, used to improve editor features.
+  gem "ruby-lsp", require: false
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
@@ -62,7 +64,12 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # sorbet
+  gem 'sorbet'
+  gem 'tapioca', require: false
 end
 
-
-gem "ruby-lsp", "~> 0.3.5", :group => :development
+gem 'sorbet-runtime'
+gem "solargraph", "~> 0.47.2"
+gem "faker", "~> 2.23"
