@@ -27,9 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_204547) do
     t.decimal "price", precision: 15, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "orders_id", null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
-    t.index ["orders_id"], name: "index_order_items_on_orders_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
@@ -69,7 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_204547) do
   end
 
   add_foreign_key "order_items", "orders"
-  add_foreign_key "order_items", "orders", column: "orders_id"
   add_foreign_key "order_items", "products"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
