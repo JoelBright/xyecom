@@ -5,23 +5,26 @@ application up and running.
 
 Things you may want to cover:
 
-- Ruby version
+- Ruby version: Latest
 
-- System dependencies
+- System dependencies: 
+- - Present in the gemfile
 
-- Configuration
+- Configuration: 
+- - Please setup a connection to a postgreSQL DB before running any rake commands
 
-- Database creation
+- Database creation: 
+- - Please use the command
+
+- - - rake db:create
+
+- - Followed by 
+
+- - - rake db:migrate
 
 - Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+- - To seed the database with random data use the command 
+- - - rails db:seed
 
 # Website schema
 
