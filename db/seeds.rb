@@ -37,7 +37,7 @@ PRODUCTS_COUNT.times do
     break unless Product.exists?(title: title)
   end
 
-  descriptionText = Faker::Commerce.color + " coloured " + Faker::Commerce.material + " " + title + " from " + Faker::Commerce.brand + " sold by " + Faker::Commerce.vendor
+  descriptionText = "The " + Faker::Commerce.color + " coloured " + Faker::Commerce.material + " " + title + " from " + Faker::Commerce.brand + " sold by " + Faker::Commerce.vendor
 
   product = Product.new(
     title: title,
